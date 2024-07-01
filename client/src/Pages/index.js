@@ -1,0 +1,5 @@
+export * from './HomePage'
+export * from './PokemonPage'
+export * from './SearchPage'
+export * from '../components/SearchBar/SearchBar'
+export * from '../components/LandingPage/LandingPage'

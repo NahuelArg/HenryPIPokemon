@@ -1,0 +1,33 @@
+.pagination{
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    padding: 5px;
+    gap: 20px;
+    margin: 5px;
+}
+
+button{
+    background: #fff;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+
+}
+li{
+    border: #000 solid;
+    list-style: none;
+    border-radius: 20px;
+    padding: 5px;
+    box-shadow: 1px 0px 1px 1px rgba(115, 115, 115, 0.8);
+    cursor: pointer;
+}
+
+li:hover{
+    transform: translateX(3px);
+    transition: all .3s ease-in-out;
+}
+
+.active {
+    border-color: #006d77;
+}
