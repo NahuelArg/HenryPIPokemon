@@ -17,7 +17,6 @@ const {
   addImageLabel,
   hidden,
   btnDelete,
-  error,
 } = styles;
 
 export const Form = () => {
@@ -86,13 +85,14 @@ export const Form = () => {
 
   const handleImageUpload = (event) => {
     const files = event.target.files[0];
-    try {
+    if(files){ try {
       const imageUrl = URL.createObjectURL(files);
       setImagen(imageUrl);
     } catch (error) {
       console.error("Error al crear la URL del objeto:", error);
     }
-  };
+  };}
+    
 
   return (
     <div className={formContainer}>
@@ -105,7 +105,7 @@ export const Form = () => {
           <div className={groupImage}>
             {imagen && (
               <div className={showImage}>
-                <img src={imagen} alt="Imagen" />
+                <img src={imagen} alt="Imagen del pokemon" />
                 <button onClick={() => setImagen(null)} className={btnDelete}>
                   borrar
                 </button>

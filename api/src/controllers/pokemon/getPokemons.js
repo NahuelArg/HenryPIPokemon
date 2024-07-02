@@ -1,6 +1,7 @@
 const axios = require('axios')
 const { Pokemon, Type } = require("../../db");
 const { Op } = require("sequelize");
+const {isUUID} = require('validator')
 const cache = {}
 exports.getPokemon = async(req, res)=>{
     try{
@@ -106,7 +107,8 @@ exports.getPokemonId = async (req, res)=>{
     if(!pokemonDb){
       return res.status(404).json({ message: "Pokemon no encontrado" });
     }
-    const pokemonData = pokemonDb.toJson();
+
+    const pokemonData = pokemonDb.toJSON();
     pokemon = {
       id : pokemonData.id,
       externalId: pokemonData.externalId,
@@ -199,16 +201,17 @@ exports.getPokemonByName = async (req, res) => {
   }
 };
 exports.postPokemons = async(req, res) =>{
- const { name, image, life, attack, defense, speed, height, weight, type }=req.body;
+ const { name, image, life, attack, defense, speed, height, weight, types }=req.body;
  if (
   !name ||
+  !image||
   !life ||
   !attack ||
   !defense ||
   !speed ||
   !height ||
   !weight ||
-  !type
+  !types
 ) {
   return res.status(400).json({ message: "Faltan campos requeridos." });
 }
@@ -232,12 +235,12 @@ try {
     height,
     weight
   })
-  if (type && type.length > 0) {
+  if (types && types.length > 0) {
     const typeRecords = await Type.findAll({
-      where: { id: { [Op.in]: type} },
+      where: { id: { [Op.in]: types} },
     });
 
-    if (typeRecords.length !== type.length) {
+    if (typeRecords.length !== types.length) {
       return res
         .status(400)
         .json({ message: "Algunos tipos proporcionados no existen." });

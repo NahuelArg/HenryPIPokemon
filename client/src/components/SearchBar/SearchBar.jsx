@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./Search.module.css"
+import styles from "./SearchBar.module.css"
 
 export const SearchBar = ({onSearch}) => {
   const [namePokemon, setNamePokemon] = useState("")
